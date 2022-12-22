@@ -5,6 +5,7 @@ class EmployeePayrollData{
     salary;
     gender;
     startDate;
+    pinCode;
 
     //constructors
     constructor(...params){
@@ -13,6 +14,7 @@ class EmployeePayrollData{
         this.salary=params[2];
         this.gender=params[3];
         this.startDate=params[4];
+        this.pinCode=params[5];
     }
 
     //getter and setter methods
@@ -21,6 +23,7 @@ class EmployeePayrollData{
     get getSalary() {return this.salary;}
     get getGender() {return this.gender;}
     get getStartDate() {return this.startDate;}
+    get getPinCode() {return this.pinCode;}
     set setId(id) {
         let idRegex = RegExp("^[1-9]$");
         if(idRegex.test(id)) this.id = id;
@@ -46,6 +49,11 @@ class EmployeePayrollData{
         if(startDateRegex.test(startDate)) this.startDate = startDate;
         else throw 'Start Date is incorrect';
     }
+    set setPinCode(pinCode) {
+        let pinCodeRegex = RegExp("^[1-9]{1}[0-9]{2}\\s{0,1}[0-9]{3}$");
+        if(pinCodeRegex.test(pinCode)) this.pinCode = pinCode;
+        else throw 'Pin Code is incorrect';
+    }
     
     //toString method
     toString(){
@@ -53,7 +61,7 @@ class EmployeePayrollData{
         const empDate=this.startDate==undefined ? "undefined" :
                         this.startDate.toLocaleDateString("en-US", options);
         return "id="+this.id+" : name="+this.name+" : salary="+this.salary+
-        " : gender="+this.gender+" : Start Date="+empDate;
+        " : gender="+this.gender+" : Start Date="+empDate+" : Pin Code="+this.pinCode;
     }
 }
 
@@ -66,7 +74,7 @@ try{
 catch(exception){
     console.error(exception);
 }
-let employeePayrollData2=new EmployeePayrollData(1,"Terrisa",30000,"F",new Date());
+let employeePayrollData2=new EmployeePayrollData(1,"Terrisa",30000,"F",new Date(),560036);
 process.stdout.write(employeePayrollData2.toString()+"\n");
 try{
     employeePayrollData2.setId=0;
@@ -105,6 +113,41 @@ catch(exception){
 }
 try{
     employeePayrollData2.setStartDate=new Date(2023,01,01);
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setPinCode=400088;
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setPinCode="A400088";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setPinCode="A400088";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setPinCode="400088B";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setPinCode="400 088";
     process.stdout.write(employeePayrollData2.toString()+"\n");
 }
 catch(exception){
