@@ -29,8 +29,8 @@ let empDailyWageMap = new Map();
 let empDailyHrsMap = new Map();
 let empDailyHrsAndWageArr = new Array();
 
-while((totalEmpHrs <= MAX_HRS_IN_MONTH) && 
-        (totalWorkingDays < NUM_OF_WORKING_DAYS)){
+while((totalEmpHrs<=MAX_HRS_IN_MONTH) && 
+        (totalWorkingDays<NUM_OF_WORKING_DAYS)){
     totalWorkingDays++;
     let empCheck = Math.floor(Math.random()*10)%3;
     let empHrs=getWorkingHours(empCheck);
@@ -39,8 +39,7 @@ while((totalEmpHrs <= MAX_HRS_IN_MONTH) &&
     empDailyWageMap.set(totalWorkingDays,calcDailyWage(empHrs));
     empDailyHrsMap.set(totalWorkingDays,empHrs);
 
-
-empDailyHrsAndWageArr.push(
+    empDailyHrsAndWageArr.push(
     {
         dayNum : totalWorkingDays,
         dailyHours : empHrs,
@@ -50,8 +49,8 @@ empDailyHrsAndWageArr.push(
         },
     });
 }
-console.log("Daily hours worked and wage earned: "+empDailyHrsAndWageArr);
 
+console.log("Daily hours worked and wage earned: "+empDailyHrsAndWageArr);
 console.log("Daily Wage Array: "+empDailyWageArray);
 console.log("Daily Wage Map:");
 console.log(empDailyWageMap);
@@ -156,3 +155,34 @@ empDailyHrsMap.forEach((value,key,map)=>{
 console.log("Full working days: "+fullWorkingDays);
 console.log("Part working days: "+partWorkingDays);
 console.log("Non working days: "+nonWorkingDays);
+
+//UC 11
+let totalEmpWages = empDailyHrsAndWageArr
+                            .filter(obj => obj.dailyWage >0)
+                            .reduce((totalWage,obj)=>
+                                totalWage=totalWage+obj.dailyWage,0);
+
+
+let totalEmpHours = empDailyHrsAndWageArr
+                            .filter(obj => obj.dailyHours >0)
+                            .reduce((totalHours,obj)=>
+                                totalHours=totalHours+obj.dailyHours,0);
+console.log("Total hours: "+totalEmpHours);
+console.log("Total wage: "+totalEmpWages);
+
+process.stdout.write("Logging Full Work Days:\n");
+empDailyHrsAndWageArr
+        .filter(obj=>obj.dailyHours == 8)
+        .forEach(obj=>process.stdout.write(obj.toString()));
+
+let partWorkingDayStrArr = empDailyHrsAndWageArr
+                                    .filter(obj=>obj.dailyHours==4)
+                                    .map(obj=>obj.toString());
+process.stdout.write("Logging Part Working Days:\n");
+console.log(partWorkingDayStrArr);
+
+let nonWorkingDayStrArr = empDailyHrsAndWageArr
+                                    .filter(obj=>obj.dailyHours==0)
+                                    .map(obj=>obj.dayNum);
+process.stdout.write("Logging Non Working Days:\n");
+console.log(nonWorkingDayStrArr);
