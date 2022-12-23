@@ -6,6 +6,7 @@ class EmployeePayrollData{
     gender;
     startDate;
     pinCode;
+    email;
 
     //constructors
     constructor(...params){
@@ -15,6 +16,7 @@ class EmployeePayrollData{
         this.gender=params[3];
         this.startDate=params[4];
         this.pinCode=params[5];
+        this.email=params[6];
     }
 
     //getter and setter methods
@@ -24,6 +26,7 @@ class EmployeePayrollData{
     get getGender() {return this.gender;}
     get getStartDate() {return this.startDate;}
     get getPinCode() {return this.pinCode;}
+    get getEmail() {return this.email;}
     set setId(id) {
         let idRegex = RegExp("^[1-9]$");
         if(idRegex.test(id)) this.id = id;
@@ -54,6 +57,11 @@ class EmployeePayrollData{
         if(pinCodeRegex.test(pinCode)) this.pinCode = pinCode;
         else throw 'Pin Code is incorrect';
     }
+    set setEmail(email) {
+        let emailRegex = RegExp("^[a-z0-9+_.-]+@+[a-z/0-9]+.+[a-z]{2,}$");
+        if(emailRegex.test(email)) this.email = email;
+        else throw 'Email is incorrect';
+    }
     
     //toString method
     toString(){
@@ -61,7 +69,7 @@ class EmployeePayrollData{
         const empDate=this.startDate==undefined ? "undefined" :
                         this.startDate.toLocaleDateString("en-US", options);
         return "id="+this.id+" : name="+this.name+" : salary="+this.salary+
-        " : gender="+this.gender+" : Start Date="+empDate+" : Pin Code="+this.pinCode;
+        " : gender="+this.gender+" : Start Date="+empDate+" : Pin Code="+this.pinCode+" : Email="+this.email;
     }
 }
 
@@ -74,7 +82,7 @@ try{
 catch(exception){
     console.error(exception);
 }
-let employeePayrollData2=new EmployeePayrollData(1,"Terrisa",30000,"F",new Date(),560036);
+let employeePayrollData2=new EmployeePayrollData(1,"Terrisa",30000,"F",new Date(),560036,"terrisa@gmail.com");
 process.stdout.write(employeePayrollData2.toString()+"\n");
 try{
     employeePayrollData2.setId=0;
@@ -148,6 +156,178 @@ catch(exception){
 }
 try{
     employeePayrollData2.setPinCode="400 088";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+//UC -1 Email
+try{
+    employeePayrollData2.setEmail="abc.xyz@bridgelabz.co.in";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+//UC -2 Email
+try{
+    employeePayrollData2.setEmail="abc.xyz@bridgelabz.co.in";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+//UC -3 Email (Valid Emails)
+try{
+    employeePayrollData2.setEmail="abc@yahoo.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc-100@yahoo.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc.100@yahoo.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc111@abc.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc-100@abc.net";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc.100@abc.com.au";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc@1.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc@gmail.com.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc+100@gmail.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+//Uc -4 (Invalid Emails)
+try{
+    employeePayrollData2.setEmail="abc";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc@.com.my";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc123@gmail.a";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc123@.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc123@.com.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail=".abc@abc.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc()*@gmail.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc@%*.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc..2002@gmail.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc.@gmail.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc@abc@gmail.com";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc@gmail.com.1a";
+    process.stdout.write(employeePayrollData2.toString()+"\n");
+}
+catch(exception){
+    console.error(exception);
+}
+try{
+    employeePayrollData2.setEmail="abc@gmail.com.aa.au";
     process.stdout.write(employeePayrollData2.toString()+"\n");
 }
 catch(exception){
